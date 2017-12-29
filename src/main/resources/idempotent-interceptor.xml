@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="pointcut" ref="aspectJExpressionPointcut"/>
+        <property name="advice" ref="idempotentInterceptor"/>
+    </bean>
+
+    <bean name="idempotentInterceptor" class="com.chen.component.idempotent.interceptor.IdempotentInterceptor"/>
+    <bean name="aspectJExpressionPointcut" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+        <property name="expression" value="@annotation(com.chen.component.idempotent.annotation.ChenIdempotent)"/>
+    </bean>
+</beans>

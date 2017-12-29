@@ -1,0 +1,29 @@
+ext{
+    child_version = '1.0.0'
+    pro_type = 'component'
+}
+apply plugin: "project-report"
+apply plugin: 'java'
+apply plugin: "com.chen.jarconfig"
+
+/**
+ * 插件配置
+ */
+buildscript {
+    repositories {
+        //mavenLocal()
+        maven { url "http://nexus.chen.com/nexus/content/groups/public/" }
+    }
+    dependencies {
+        classpath 'com.chen:chen-gradle-plugin:+'
+    }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.springframework:spring-aop:4.3.10.RELEASE'
+}
+
